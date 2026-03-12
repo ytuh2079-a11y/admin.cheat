@@ -1,0 +1,26 @@
+name: Build AdminAddon DLL
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup GCC (MinGW)
+        uses: egor-tensin/setup-gcc@v1
+        with:
+          version: 12.2.0
+          platform: x64
+
+      - name: Compile DLL
+        run: |
+          g++ -shared -o cheat.dll AdminCheat.cpp AdminUI.cpp AdvancedAdminCheat.cpp dllmain.cpp -I./ -lgdi32 -ldwmapi -luser32 -static -O3
+
+      - name: Upload Finished DLL
+        uses: actions/upload-artifact@v4
+        with:
+          name: AdminAddon-Binary
+          path: cheat.dll
+          
