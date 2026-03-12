@@ -1,0 +1,24 @@
+name: Build AdminAddon DLL
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: 1. Отримуємо код з репозиторію
+        uses: actions/checkout@v4
+
+      - name: 2. Встановлюємо MinGW (компілятор)
+        uses: egor-tensin/setup-mingw@v2
+        with:
+          platform: x64
+
+      - name: 3. Компілюємо DLL (універсальний пошук .cpp)
+        run: |
+          g++ -shared -o AdminAddon.dll *.cpp -I./ -lgdi32 -ldwmapi -luser32 -static -O3
+
+      - name: 4. Створюємо архів з готовим файлом
+        uses: actions/upload-artifact@v4
+        with:
+          name: Final-DLL-Project
+          path: AdminAddon.dll
