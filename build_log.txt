@@ -1,0 +1,12 @@
+ 
+====================================== 
+AdminAddon DLL Build Log 
+====================================== 
+Build started: Thu 03/12/2026 11:03:14.41 
+ 
+[INFO] Папка проекта: C:\AdminAddon 
+[OK] Все файлы найдены 
+[ERROR] Visual Studio не найдена 
+Установите Visual Studio 2019/2022 Community Edition 
+[ERROR] Сборка провалилась 
+Build failed: Thu 03/12/2026 11:03:14.48 
